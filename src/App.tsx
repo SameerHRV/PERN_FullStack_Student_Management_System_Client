@@ -6,7 +6,7 @@ import routerProvider, {
   DocumentTitleHandler,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
-import { BookOpen, Home } from "lucide-react";
+import { BookOpen, GraduationCap, Home } from "lucide-react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
 import { Layout } from "./components/refine-ui/layout/layout";
@@ -14,6 +14,8 @@ import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 import Dashboard from "./pages/dashboard";
+import ClassesCreate from "./pages/classes/create";
+import ClassesList from "./pages/classes/list";
 import SubjectsCreate from "./pages/subjects/create";
 import SubjectsList from "./pages/subjects/list";
 import dataProvider from "./provider/data";
@@ -43,12 +45,21 @@ function App() {
                   },
                 },
                 {
-                  name: "list",
+                  name: "subjects",
                   list: "/subjects",
                   create: "/subjects/create",
                   meta: {
                     label: "Subjects",
                     icon: <BookOpen />,
+                  },
+                },
+                {
+                  name: "classes",
+                  list: "/classes",
+                  create: "/classes/create",
+                  meta: {
+                    label: "Classes",
+                    icon: <GraduationCap />,
                   },
                 },
               ]}
@@ -62,9 +73,15 @@ function App() {
                   }
                 >
                   <Route path="/" element={<Dashboard />} />
+
                   <Route path="subjects">
                     <Route index element={<SubjectsList />} />
                     <Route path="create" element={<SubjectsCreate />} />
+                  </Route>
+
+                  <Route path="classes">
+                    <Route index element={<ClassesList />} />
+                    <Route path="create" element={<ClassesCreate />} />
                   </Route>
                 </Route>
               </Routes>
